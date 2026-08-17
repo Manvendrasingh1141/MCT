@@ -1,0 +1,8 @@
+{
+  "name": "App Prototype",
+  "description": "A multi-page application prototype with routing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

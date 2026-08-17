@@ -1,0 +1,22 @@
+@import url('https://api.fontshare.com/v2/css?f[]=supreme@400,500,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-sakura-primary: #2D0A11;
+  --color-sakura-secondary: #D67B93;
+  --color-sakura-tertiary: #F9A8C1;
+  --color-sakura-base: #FFF9FB;
+  --color-sakura-surface: #FFF1F6;
+
+  --font-serif: "Bodoni Moda", serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-supreme: "Supreme", sans-serif;
+}
+
+body {
+  background-color: var(--color-sakura-base);
+  color: var(--color-sakura-primary);
+  font-family: var(--font-sans);
+}
+
