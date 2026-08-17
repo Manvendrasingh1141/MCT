@@ -8,6 +8,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { ProductPage } from "./pages/ProductPage";
 import { ContactPage } from "./pages/ContactPage";
 import { OrderPage } from "./pages/OrderPage";
+import { AboutPage } from "./pages/AboutPage";
 import { SmoothScroll } from "./components/SmoothScroll";
 import { useFadeUpAnimations } from "./hooks/useFadeUpAnimations";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -40,7 +41,7 @@ export default function App() {
         <Route path="/individuals" element={<PlaceholderPage title="For Individuals" />} />
         <Route path="/companies" element={<PlaceholderPage title="For Companies" />} />
         <Route path="/gymr" element={<PlaceholderPage title="GYMR" />} />
-        <Route path="/about" element={<PlaceholderPage title="About" />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/blog" element={<PlaceholderPage title="Blog" />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/order" element={<OrderPage />} />
