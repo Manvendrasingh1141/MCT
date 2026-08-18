@@ -21,6 +21,7 @@ export function OrderPage() {
     pincode: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -32,7 +33,6 @@ export function OrderPage() {
         { x: 40, opacity: 0 },
         { x: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.1 }
       );
-      // Stagger the left panel children
       gsap.fromTo('.left-item',
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power2.out', delay: 0.3 }
@@ -45,15 +45,34 @@ export function OrderPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    gsap.to(rightRef.current, {
-      scale: 0.98, duration: 0.12, ease: 'power2.in', yoyo: true, repeat: 1,
-      onComplete: () => {
-        setSubmitted(true);
-        showToast(`Thank you, ${form.fullName}! You've been added to the EaseBand priority list.`, 'success');
-      },
-    });
+    setIsLoading(true);
+
+    const sheetUrl = import.meta.env.VITE_SHEET_URL as string | undefined;
+
+    try {
+      if (sheetUrl) {
+        // Apps Script requires text/plain to avoid CORS preflight
+        await fetch(sheetUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(form),
+        });
+      }
+
+      gsap.to(rightRef.current, {
+        scale: 0.98, duration: 0.12, ease: 'power2.in', yoyo: true, repeat: 1,
+        onComplete: () => {
+          setSubmitted(true);
+          showToast(`You're on the list, ${form.fullName}! We'll reach out soon.`, 'success');
+        },
+      });
+    } catch {
+      showToast('Something went wrong. Please try again.', 'error');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const perks = [
@@ -144,7 +163,8 @@ export function OrderPage() {
           <div className="flex items-start gap-2">
             <Lock size={13} className="mt-0.5 shrink-0" style={{ color: 'rgba(249,246,240,0.35)' }} />
             <p className="text-[12px] leading-relaxed" style={{ color: 'rgba(249,246,240,0.38)' }}>
-              Your details are collected only to process your EaseBand request and keep you informed about your order and shipment. <strong style={{ color: 'rgba(249,246,240,0.55)' }}>No payment will be taken at this stage.</strong>
+              Your details are collected only to process your EaseBand request and keep you informed about your order and shipment.{' '}
+              <strong style={{ color: 'rgba(249,246,240,0.55)' }}>No payment will be taken at this stage.</strong>
             </p>
           </div>
         </div>
@@ -159,7 +179,6 @@ export function OrderPage() {
         <div className="w-full max-w-lg">
           {!submitted ? (
             <>
-              {/* Section heading */}
               <h2 className="font-serif text-[34px] md:text-[42px] leading-none mb-2"
                 style={{ color: 'var(--color-sakura-primary)' }}>
                 Reserve Your Spot
@@ -170,28 +189,18 @@ export function OrderPage() {
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-7">
-                {/* Full Name */}
                 <FormField label="Full Name" name="fullName" type="text" required value={form.fullName} onChange={handleChange} />
-
-                {/* Phone */}
                 <FormField label="Phone Number" name="phone" type="tel" required value={form.phone} onChange={handleChange} />
-
-                {/* Email */}
                 <FormField label="Email Address" name="email" type="email" required value={form.email} onChange={handleChange} />
-
-                {/* Address */}
                 <FormField label="Delivery Address" name="address" type="text" required value={form.address} onChange={handleChange} placeholder="House / Flat / Street" />
 
-                {/* City + State side by side */}
                 <div className="grid grid-cols-2 gap-5">
                   <FormField label="City" name="city" type="text" required value={form.city} onChange={handleChange} />
                   <FormField label="State" name="state" type="text" required value={form.state} onChange={handleChange} />
                 </div>
 
-                {/* Pincode */}
                 <FormField label="Pincode" name="pincode" type="text" required value={form.pincode} onChange={handleChange} placeholder="6-digit PIN" />
 
-                {/* Divider */}
                 <div className="pt-2 pb-1">
                   <div className="h-px" style={{ backgroundColor: 'rgba(45,10,17,0.08)' }} />
                 </div>
@@ -199,24 +208,34 @@ export function OrderPage() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="relative overflow-hidden w-full font-sans font-bold text-[13px] tracking-[0.18em] uppercase px-8 py-5 rounded-xl cursor-pointer"
+                  disabled={isLoading}
+                  className="relative overflow-hidden w-full font-sans font-bold text-[13px] tracking-[0.18em] uppercase px-8 py-5 rounded-xl cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ border: '1.5px solid var(--color-sakura-primary)', color: 'var(--color-sakura-primary)', backgroundColor: 'transparent' }}
                   onMouseEnter={(e) => {
+                    if (isLoading) return;
                     gsap.to(e.currentTarget.querySelector('.obtn-bg'), { scaleX: 1, transformOrigin: 'left', duration: 0.4, ease: 'power2.out' });
                     gsap.to(e.currentTarget.querySelector('.obtn-text'), { color: '#F9F6F0', duration: 0.3 });
                   }}
                   onMouseLeave={(e) => {
+                    if (isLoading) return;
                     gsap.to(e.currentTarget.querySelector('.obtn-bg'), { scaleX: 0, transformOrigin: 'right', duration: 0.4, ease: 'power2.out' });
                     gsap.to(e.currentTarget.querySelector('.obtn-text'), { clearProps: 'color', duration: 0.3 });
                   }}
                 >
                   <div className="obtn-bg absolute inset-0 scale-x-0 origin-left" style={{ backgroundColor: 'var(--color-sakura-primary)' }} />
-                  <span className="obtn-text relative z-10 pointer-events-none transition-colors duration-300">
-                    Join the EaseBand Priority List
+                  <span className="obtn-text relative z-10 pointer-events-none transition-colors duration-300 flex items-center justify-center gap-2">
+                    {isLoading ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Submitting...
+                      </>
+                    ) : 'Join the EaseBand Priority List'}
                   </span>
                 </button>
 
-                {/* Trust micro-copy */}
                 <p className="text-center text-[11px] font-bold tracking-[0.1em] uppercase"
                   style={{ color: 'rgba(45,10,17,0.35)' }}>
                   🔒 Safe &amp; private · No spam, ever · No payment now
@@ -295,7 +314,6 @@ function FormField({ label, name, type, required, value, onChange, placeholder }
             ? '1.5px solid var(--color-sakura-secondary)'
             : '1px solid rgba(45,10,17,0.15)',
           color: 'var(--color-sakura-primary)',
-          placeholderColor: 'rgba(45,10,17,0.35)',
         }}
       />
     </div>
