@@ -34,8 +34,11 @@ export function Footer() {
             Get in Touch
           </h4>
           <div className="flex flex-col space-y-4 font-sans text-[16px] font-normal text-sakura-base/80">
-            <a href="mailto:mct.medtech@gmail.com" className="hover:text-sakura-tertiary transition-colors w-fit">
-              mct.medtech@gmail.com
+            <a href="mailto:support.medcaretech@gmail.com" className="hover:text-sakura-tertiary transition-colors w-fit">
+              support.medcaretech@gmail.com
+            </a>
+            <a href="mailto:products.medcaretech@gmail.com" className="hover:text-sakura-tertiary transition-colors w-fit">
+              products.medcaretech@gmail.com
             </a>
             <a href="tel:8699715686" className="hover:text-sakura-tertiary transition-colors w-fit">
               8699715686

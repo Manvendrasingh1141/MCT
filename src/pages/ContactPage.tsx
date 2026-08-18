@@ -98,10 +98,16 @@ export function ContactPage() {
             <p className="font-sans text-[15px] text-sakura-primary/80  max-w-[280px] mb-8">
               For general inquiries, support, and partnership opportunities.
             </p>
-            <a href="mailto:MCT.MEDTECH@GMAIL.COM" className="flex items-center gap-3 text-sakura-primary font-medium mt-auto hover:text-sakura-secondary transition-colors uppercase group">
-              <Mail size={18} className="text-sakura-primary/80 group-hover:text-sakura-secondary transition-colors" />
-              <span>MCT.MEDTECH@GMAIL.COM</span>
-            </a>
+            <div className="flex flex-col gap-3 mt-auto">
+              <a href="mailto:support.medcaretech@gmail.com" className="flex items-center justify-center gap-3 text-sakura-primary font-medium hover:text-sakura-secondary transition-colors group">
+                <Mail size={18} className="text-sakura-primary/80 group-hover:text-sakura-secondary transition-colors" />
+                <span className="text-[14px]">support.medcaretech@gmail.com</span>
+              </a>
+              <a href="mailto:products.medcaretech@gmail.com" className="flex items-center justify-center gap-3 text-sakura-primary font-medium hover:text-sakura-secondary transition-colors group">
+                <Mail size={18} className="text-sakura-primary/80 group-hover:text-sakura-secondary transition-colors" />
+                <span className="text-[14px]">products.medcaretech@gmail.com</span>
+              </a>
+            </div>
           </div>
 
           {/* Follow Us */}
