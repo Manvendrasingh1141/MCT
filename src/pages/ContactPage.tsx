@@ -26,10 +26,35 @@ export function ContactPage() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    showToast('Your message has been sent successfully! We\'ll get back to you soon.', 'success');
-    setForm({ name: '', email: '', phone: '', message: '' });
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+
+    try {
+      if (accessKey) {
+        const payload = {
+          access_key: accessKey,
+          subject: `New Contact Message: ${form.name}`,
+          from_name: "MCT Website",
+          ...form
+        };
+
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Failed to submit form');
+      }
+      showToast('Your message has been sent successfully! We\'ll get back to you soon.', 'success');
+      setForm({ name: '', email: '', phone: '', message: '' });
+    } catch {
+      showToast('Something went wrong. Please try again.', 'error');
+    }
   };
 
   return (

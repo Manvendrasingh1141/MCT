@@ -49,16 +49,27 @@ export function OrderPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    const sheetUrl = import.meta.env.VITE_SHEET_URL as string | undefined;
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
     try {
-      if (sheetUrl) {
-        // Apps Script requires text/plain to avoid CORS preflight
-        await fetch(sheetUrl, {
+      if (accessKey) {
+        const payload = {
+          access_key: accessKey,
+          subject: `New EaseBand Order: ${form.fullName}`,
+          from_name: "MCT Website",
+          ...form
+        };
+
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify(form),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
         });
+
+        if (!res.ok) throw new Error('Failed to submit form');
       }
 
       gsap.to(rightRef.current, {
