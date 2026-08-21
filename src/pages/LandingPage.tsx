@@ -10,7 +10,7 @@ export function LandingPage() {
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
       <NavBar />
 
-      <div className="relative min-h-screen">
+      <div className="relative h-[50vh] md:h-screen min-h-[400px]">
         <video 
           src="https://res.cloudinary.com/ka8ice0a/video/upload/v1786947224/hero.mp4" 
           autoPlay 
@@ -20,7 +20,7 @@ export function LandingPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/10" />
-        <main className="relative z-10 flex flex-col items-center justify-end min-h-screen text-center px-4 pb-[20px]">
+        <main className="relative z-10 flex flex-col items-center justify-end h-full text-center px-4 pb-[20px]">
           <h1 className="font-serif italic text-[26px] md:text-[28px]  tracking-[-0.02em] text-sakura-base drop-shadow-md">
             Technology For Humanity
           </h1>

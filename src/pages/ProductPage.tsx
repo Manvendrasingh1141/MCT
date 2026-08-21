@@ -83,7 +83,7 @@ export function ProductPage() {
       <NavBar />
       
       {/* Banner Image Section */}
-      <div className="relative w-full h-[90vh] md:h-[100vh] overflow-hidden">
+      <div className="relative w-full h-[50vh] md:h-[100vh] min-h-[400px] overflow-hidden">
         <img 
           ref={imageRef}
           src="https://res.cloudinary.com/ka8ice0a/image/upload/v1786960335/banner.jpg" 

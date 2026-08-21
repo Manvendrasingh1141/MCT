@@ -46,7 +46,7 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
 
   return (
     <>
-      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+      <div className="absolute top-4 left-0 right-0 z-50 flex justify-center px-4">
         <nav className={`backdrop-blur-md border rounded-full px-4 py-2 flex items-center justify-between w-full max-w-5xl transition-colors duration-300 ${
           isActiveDark || isMobileMenuOpen
             ? 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary' 
