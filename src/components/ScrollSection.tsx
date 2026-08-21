@@ -74,14 +74,14 @@ export function ScrollSection() {
         {/* Left Panel - Dark Background */}
         <div 
           ref={leftPanelRef}
-          className="w-full md:w-1/2 h-full bg-sakura-primary rounded-[32px] md:rounded-[48px] p-8 md:p-16 flex flex-col justify-center relative overflow-hidden"
+          className="w-full md:w-1/2 h-1/2 md:h-full bg-sakura-primary rounded-[32px] md:rounded-[48px] p-6 md:p-16 flex flex-col justify-center relative overflow-hidden"
         >
           {content.map((item, index) => (
             <div 
               key={`q-${index}`} 
-              className="q-item absolute inset-0 p-8 md:p-16 flex flex-col justify-center"
+              className="q-item absolute inset-0 p-6 md:p-16 flex flex-col justify-center"
             >
-              <h3 className="font-serif text-[32px] md:text-[48px] leading-[40px] md:leading-[56px] text-sakura-base font-medium">
+              <h3 className="font-serif text-[28px] md:text-[48px] leading-[36px] md:leading-[56px] text-sakura-base font-medium">
                 {item.question}
               </h3>
             </div>
@@ -91,12 +91,12 @@ export function ScrollSection() {
         {/* Right Panel - Transparent (Secondary Color from Parent) */}
         <div 
           ref={rightPanelRef}
-          className="w-full md:w-1/2 h-full p-8 md:p-16 flex flex-col justify-center relative overflow-hidden"
+          className="w-full md:w-1/2 h-1/2 md:h-full p-6 md:p-16 flex flex-col justify-center relative overflow-hidden"
         >
           {content.map((item, index) => (
             <div 
               key={`a-${index}`} 
-              className="a-item absolute inset-0 p-8 md:p-16 flex flex-col justify-center"
+              className="a-item absolute inset-0 p-6 md:p-16 flex flex-col justify-center"
             >
               <p className="font-sans text-[18px] md:text-[24px] leading-[28px] md:leading-[36px] text-sakura-primary font-normal">
                 {item.answer}
