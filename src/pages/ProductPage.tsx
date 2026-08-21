@@ -250,13 +250,14 @@ export function ProductPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {[
-              { id: 1, name: 'Riddhi', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786980230/riddhi.mov' },
-              { id: 2, name: 'Kashish', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786980268/kashish.mp4' },
-              { id: 3, name: 'Jasman', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786981636/jasman_1.mov' },
-              { id: 4, name: 'Kalyani', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786983973/kalvani.mp4' },
-              
+              { id: 1, name: 'Khushi', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1787279777/Khushi.mp4' },
+              { id: 2, name: 'Ritika', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1787279020/Easeband_1.mp4' },
+              { id: 3, name: 'Riddhi', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786980230/riddhi.mov' },
+              { id: 4, name: 'Kashish', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786980268/kashish.mp4' },
+              { id: 5, name: 'Jasman', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786981636/jasman_1.mov' },
+              { id: 6, name: 'Kalyani', videoUrl: 'https://res.cloudinary.com/ka8ice0a/video/upload/v1786983973/kalvani.mp4' },
             ].map((review) => (
               <div 
                 key={review.id}
