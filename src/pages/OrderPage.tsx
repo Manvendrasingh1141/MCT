@@ -52,6 +52,8 @@ export function OrderPage() {
     const accessKey = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
     try {
+      // 1. Send Email via Web3Forms
+      let web3Promise = Promise.resolve();
       if (accessKey) {
         const payload = {
           access_key: accessKey,
@@ -60,17 +62,37 @@ export function OrderPage() {
           ...form
         };
 
-        const res = await fetch('https://api.web3forms.com/submit', {
+        web3Promise = fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
           body: JSON.stringify(payload)
-        });
-
-        if (!res.ok) throw new Error('Failed to submit form');
+        }).then(res => {
+          if (!res.ok) throw new Error('Web3Forms failed');
+        }) as any;
       }
+
+      // 2. Save to Google Sheets
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbyXGWrcYOZpy8Q10u00FiM4XMdvgGNflNt1nuOolLmn2q5iYq4WmBTVDgRLtG-yqM8CvA/exec';
+      const formData = new URLSearchParams();
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      // Using mode: 'no-cors' guarantees we don't get blocked by browser security
+      const sheetsPromise = fetch(scriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+      });
+
+      // Run both network requests at the same time
+      await Promise.all([web3Promise, sheetsPromise]);
 
       gsap.to(rightRef.current, {
         scale: 0.98, duration: 0.12, ease: 'power2.in', yoyo: true, repeat: 1,
