@@ -139,7 +139,7 @@ export default function EaseBandFeatures() {
             {/* Main Box */}
             <div className="w-full aspect-[2/1] border border-sakura-primary/20 rounded-[24px] md:rounded-[32px] overflow-hidden">
               <img 
-                src="https://res.cloudinary.com/ka8ice0a/image/upload/v1786951182/WhatsApp_Image_2026-08-17_at_11.56.55.jpg" 
+                src="https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/easeband_Product_gc6z7x.jpg" 
                 alt="EaseBand" 
                 className="w-full h-full object-cover" 
               />
