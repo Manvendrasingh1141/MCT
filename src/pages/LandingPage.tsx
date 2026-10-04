@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { NavBar } from '../components/NavBar';
 import { ScrollSection } from '../components/ScrollSection';
 import { Footer } from '../components/Footer';
@@ -5,20 +6,37 @@ import EaseBandFeatures from '../components/EaseBandFeatures';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 
+const heroImages = [
+  "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct1_ccipxz.jpg",
+  "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct2_clgabq.jpg",
+  "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct3_egq1er.jpg"
+];
+
 export function LandingPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
       <NavBar />
 
       <div className="relative h-[50vh] md:h-screen min-h-[400px]">
-        <video 
-          src="https://res.cloudinary.com/ka8ice0a/video/upload/v1786947224/hero.mp4" 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {heroImages.map((src, index) => (
+          <img
+            key={index}
+            src={src}
+            alt={`Hero Slide ${index + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
         <div className="absolute inset-0 bg-black/10" />
         <main className="relative z-10 flex flex-col items-center justify-end h-full text-center px-4 pb-[20px]">
           <h1 className="font-serif italic text-[26px] md:text-[28px]  tracking-[-0.02em] text-sakura-base drop-shadow-md">
