@@ -35,11 +35,11 @@ export function LandingPage() {
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
       <NavBar />
 
-      <div className="relative h-screen min-h-[400px]">
+      <div className="relative h-auto md:h-screen min-h-[400px]">
         {heroImages.map((srcs, index) => (
           <picture
             key={index}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+            className={`${index === 0 ? 'relative block' : 'absolute inset-0'} w-full md:absolute md:inset-0 md:h-full transition-opacity duration-1000 ${
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -48,7 +48,7 @@ export function LandingPage() {
             <img
               src={srcs.desktop}
               alt={`Hero Slide ${index + 1}`}
-              className="w-full h-full object-contain md:object-cover"
+              className="w-full h-auto md:h-full object-cover"
             />
           </picture>
         ))}
