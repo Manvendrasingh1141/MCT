@@ -9,15 +9,15 @@ import gsap from 'gsap';
 const heroImages = [
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct1_ccipxz.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791298096/m1_o2viix.jpg"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456036/m1_grws83.jpg"
   },
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct2_clgabq.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791298096/m2_czqgmk.jpg"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456036/m2_l7wqvn.jpg"
   },
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct3_egq1er.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791298096/m3_gadzjg.jpg"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456035/m3_kyp54k.jpg"
   }
 ];
 
