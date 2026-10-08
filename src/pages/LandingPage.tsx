@@ -35,7 +35,7 @@ export function LandingPage() {
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
       <NavBar />
 
-      <div className="relative h-auto md:h-screen">
+      <div className="relative h-auto md:h-screen mt-[50px] md:mt-0">
         {heroImages.map((srcs, index) => (
           <picture
             key={index}
