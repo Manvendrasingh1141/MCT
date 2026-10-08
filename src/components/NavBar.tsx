@@ -50,7 +50,7 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
         <nav className={`backdrop-blur-md border rounded-full px-4 py-2 flex items-center justify-between w-full max-w-5xl transition-colors duration-300 ${
           isActiveDark || isMobileMenuOpen
             ? 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary' 
-            : 'bg-sakura-primary md:bg-transparent border-sakura-primary/30 md:border-sakura-base/30 text-sakura-base'
+            : 'bg-transparent border-sakura-base/30 text-sakura-base'
         }`}>
           <div className="pl-2 md:pl-4 relative group cursor-pointer flex items-center">
             <Link to="/" className="flex items-center">
