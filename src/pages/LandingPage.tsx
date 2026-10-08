@@ -35,7 +35,7 @@ export function LandingPage() {
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
       <NavBar />
 
-      <div className="relative h-auto md:h-screen min-h-[400px]">
+      <div className="relative h-auto md:h-screen">
         {heroImages.map((srcs, index) => (
           <picture
             key={index}
@@ -52,8 +52,6 @@ export function LandingPage() {
             />
           </picture>
         ))}
-        <div className="absolute inset-0 bg-black/10" />
-
       </div>
 
         {/* New Secondary Statement Section */}
