@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
+export function NavBar({ forceDarkText = false, forceDarkTextOnMobile = false }: { forceDarkText?: boolean; forceDarkTextOnMobile?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -48,16 +48,20 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
     <>
       <div className="absolute top-4 left-0 right-0 z-50 flex justify-center px-4">
         <nav className={`backdrop-blur-md border rounded-full px-4 py-2 flex items-center justify-between w-full max-w-5xl transition-colors duration-300 ${
-          isActiveDark || isMobileMenuOpen
-            ? 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary' 
-            : 'bg-transparent border-sakura-base/30 text-sakura-base'
+          forceDarkTextOnMobile
+            ? isActiveDark || isMobileMenuOpen
+              ? 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary md:bg-sakura-base/90 md:border-sakura-primary/20 md:text-sakura-primary'
+              : 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary md:bg-transparent md:border-sakura-base/30 md:text-sakura-base'
+            : isActiveDark || isMobileMenuOpen
+              ? 'bg-sakura-base/90 border-sakura-primary/20 text-sakura-primary' 
+              : 'bg-transparent border-sakura-base/30 text-sakura-base'
         }`}>
           <div className="pl-2 md:pl-4 relative group cursor-pointer flex items-center">
             <Link to="/" className="flex items-center">
               <img 
                 src="https://res.cloudinary.com/ka8ice0a/image/upload/v1786980985/mct_logo.png" 
                 alt="MCT Logo" 
-                className="h-7 md:h-9 w-auto object-contain" 
+                className="h-9 md:h-12 w-auto object-contain" 
               />
             </Link>
             <span className="hidden md:flex absolute left-4 top-full mt-2 px-3 py-1.5 bg-sakura-primary/90 text-sakura-base text-[12px] font-sans font-normal tracking-normal rounded-md opacity-0 group-hover:opacity-100 transition-opacity items-center shadow-sm pointer-events-none z-50">
@@ -80,10 +84,15 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
               isActiveDark || isMobileMenuOpen
                 ? 'border-sakura-primary text-sakura-primary'
                 : 'border-sakura-base text-sakura-base'
-              }`}
+              } ${forceDarkTextOnMobile
+                ? isActiveDark || isMobileMenuOpen
+                  ? 'border-sakura-primary text-sakura-primary md:border-sakura-primary md:text-sakura-primary'
+                  : 'border-sakura-primary text-sakura-primary md:border-sakura-base md:text-sakura-base'
+                : ''}`}
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget.querySelector('.hover-bg'), { scaleX: 1, transformOrigin: 'left', duration: 0.4, ease: 'power2.out' });
-                gsap.to(e.currentTarget.querySelector('.hover-text'), { color: isActiveDark || isMobileMenuOpen ? '#F9F6F0' : '#2D0A11', duration: 0.3 });
+                const useDarkHover = isActiveDark || isMobileMenuOpen || (forceDarkTextOnMobile && window.matchMedia('(max-width: 767px)').matches);
+                gsap.to(e.currentTarget.querySelector('.hover-text'), { color: useDarkHover ? '#F9F6F0' : '#2D0A11', duration: 0.3 });
               }}
               onMouseLeave={(e) => {
                 gsap.to(e.currentTarget.querySelector('.hover-bg'), { scaleX: 0, transformOrigin: 'right', duration: 0.4, ease: 'power2.out' });
@@ -91,7 +100,13 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
               }}
             >
               <div 
-                className={`hover-bg absolute inset-0 scale-x-0 origin-left ${isActiveDark || isMobileMenuOpen ? 'bg-sakura-primary' : 'bg-sakura-base'}`} 
+                className={`hover-bg absolute inset-0 scale-x-0 origin-left ${
+                  forceDarkTextOnMobile
+                    ? isActiveDark || isMobileMenuOpen
+                      ? 'bg-sakura-primary md:bg-sakura-primary'
+                      : 'bg-sakura-primary md:bg-sakura-base'
+                    : isActiveDark || isMobileMenuOpen ? 'bg-sakura-primary' : 'bg-sakura-base'
+                }`} 
               />
               <span className="hover-text relative z-10 pointer-events-none transition-colors duration-300">
                 Let's Go
@@ -104,9 +119,9 @@ export function NavBar({ forceDarkText = false }: { forceDarkText?: boolean }) {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X size={24} className={isActiveDark || isMobileMenuOpen ? 'text-sakura-primary' : 'text-sakura-base'} />
+                <X size={24} className={forceDarkTextOnMobile || isActiveDark || isMobileMenuOpen ? 'text-sakura-primary' : 'text-sakura-base'} />
               ) : (
-                <Menu size={24} className={isActiveDark || isMobileMenuOpen ? 'text-sakura-primary' : 'text-sakura-base'} />
+                <Menu size={24} className={forceDarkTextOnMobile || isActiveDark || isMobileMenuOpen ? 'text-sakura-primary' : 'text-sakura-base'} />
               )}
             </button>
           </div>

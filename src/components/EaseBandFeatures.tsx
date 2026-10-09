@@ -137,12 +137,15 @@ export default function EaseBandFeatures() {
 
           <div ref={containerRef} className="relative w-full max-w-[1000px] mx-auto mt-16">
             {/* Main Box */}
-            <div className="w-full aspect-[2/1] border border-sakura-primary/20 rounded-[24px] md:rounded-[32px] overflow-hidden">
-              <img 
-                src="https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/easeband_Product_gc6z7x.jpg" 
-                alt="EaseBand" 
-                className="w-full h-full object-cover" 
-              />
+            <div className="w-full aspect-auto md:aspect-[2/1] border border-sakura-primary/20 rounded-[24px] md:rounded-[32px] overflow-hidden">
+              <picture className="block w-full md:h-full">
+                <source media="(max-width: 767px)" srcSet="https://res.cloudinary.com/dkganhypn/image/upload/v1791456035/easebandProduct_xcwdml.jpg" />
+                <img 
+                  src="https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/easeband_Product_gc6z7x.jpg" 
+                  alt="EaseBand" 
+                  className="w-full h-auto object-contain md:h-full md:object-cover" 
+                />
+              </picture>
             </div>
 
             {/* Callout 1: Top Right */}

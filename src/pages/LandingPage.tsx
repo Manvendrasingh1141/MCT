@@ -9,15 +9,15 @@ import gsap from 'gsap';
 const heroImages = [
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct1_ccipxz.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791468564/m1_l2i0g4.png"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456036/m1_grws83.jpg"
   },
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct2_clgabq.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791468565/m2_dhnq6p.png"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456036/m2_l7wqvn.jpg"
   },
   {
     desktop: "https://res.cloudinary.com/dkganhypn/image/upload/v1791124413/mct3_egq1er.jpg",
-    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791468565/m3_hobshs.png"
+    mobile: "https://res.cloudinary.com/dkganhypn/image/upload/v1791456035/m3_kyp54k.jpg"
   }
 ];
 
@@ -33,10 +33,10 @@ export function LandingPage() {
 
   return (
     <div className="relative min-h-screen bg-sakura-base overflow-x-hidden">
-      <NavBar />
+      <NavBar forceDarkTextOnMobile />
 
       
-<div className="relative h-auto md:h-screen mt-0 overflow-hidden bg-sakura-base">
+<div className="relative h-auto md:h-screen mt-30 md:mt-0 overflow-hidden bg-sakura-base">
   {heroImages.map((srcs, index) => (
     <picture
       key={index}

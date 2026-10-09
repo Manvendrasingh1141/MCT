@@ -38,8 +38,8 @@ export function ScrollSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "center center", // Pin when the center of the container hits the center of the viewport
-        end: "+=200%", // Pin for the duration of 200% of viewport height
+        start: "center center",
+        end: "+=200%",
         pin: true,
         scrub: 1,
         // markers: true, // Uncomment for debugging

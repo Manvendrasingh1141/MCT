@@ -80,16 +80,19 @@ export function ProductPage() {
 
   return (
     <div className="bg-sakura-base min-h-screen font-sans selection:bg-sakura-tertiary/30" ref={containerRef}>
-      <NavBar />
+      <NavBar forceDarkTextOnMobile />
       
       {/* Banner Image Section */}
-      <div className="relative w-full h-[50vh] md:h-[100vh] min-h-[400px] overflow-hidden">
-        <img 
-          ref={imageRef}
-          src="https://res.cloudinary.com/ka8ice0a/image/upload/v1786960335/banner.jpg" 
-          alt="EaseBand Product Banner" 
-          className="w-full h-full object-cover origin-center"
-        />
+      <div className="relative w-full h-[50vh] md:h-[100vh] min-h-[400px] mt-30 md:mt-0 overflow-hidden">
+        <picture className="block w-full h-full">
+          <source media="(max-width: 767px)" srcSet="https://res.cloudinary.com/dkganhypn/image/upload/v1791555501/ChatGPT_Image_Oct_9_2026_07_42_37_PM_ztdrjp.png" />
+          <img 
+            ref={imageRef}
+            src="https://res.cloudinary.com/ka8ice0a/image/upload/v1786960335/banner.jpg" 
+            alt="EaseBand Product Banner" 
+            className="w-full h-full object-cover origin-center"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-sakura-base/40 via-transparent to-black/30" />
       </div>
 
