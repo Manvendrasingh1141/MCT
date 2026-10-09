@@ -36,30 +36,22 @@ export function LandingPage() {
       <NavBar />
 
       
-<div className="relative h-[80vh] md:h-screen mt-0 overflow-hidden bg-sakura-base">
+<div className="relative h-auto md:h-screen mt-0 overflow-hidden bg-sakura-base">
   {heroImages.map((srcs, index) => (
     <picture
       key={index}
       className={`${
         index === 0 ? "relative block" : "absolute inset-0"
-      } w-full h-full md:absolute md:inset-0 transition-opacity duration-1000 ${
+      } w-full md:absolute md:inset-0 md:h-full transition-opacity duration-1000 ${
         index === currentSlide ? "opacity-100" : "opacity-0"
       }`}
     >
-      <source
-        media="(max-width: 767px)"
-        srcSet={srcs.mobile}
-      />
-
-      <source
-        media="(min-width: 768px)"
-        srcSet={srcs.desktop}
-      />
-
+      <source media="(max-width: 767px)" srcSet={srcs.mobile} />
+      <source media="(min-width: 768px)" srcSet={srcs.desktop} />
       <img
         src={srcs.desktop}
         alt={`Hero Slide ${index + 1}`}
-        className="w-full h-full object-contain"
+        className="w-full h-auto md:h-full object-cover"
       />
     </picture>
   ))}
